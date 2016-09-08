@@ -1,12 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {getSecret} from "../actions"
 
 function app(props){
+    var images = props.app.images.map((image)=>(<img key={image.id} src={image.url}/>))
     return (
         <div>
-            <button onClick={()=>props.dispatch(getSecret())}>Do Something</button>
-            {props.app.message}
+          {images}
         </div>
     )
 }
