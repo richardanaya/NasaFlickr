@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/richardanaya/nasaflickr#readme",
   "dependencies": {
+    "moment": "^2.14.1"
   },
   "devDependencies": {
     "express": "^2.5.11",
@@ -34,12 +35,11 @@
     "react-router-transition": "0.0.5",
     "redux": "^3.5.2",
     "webpack": "^1.13.1",
-    "nodemon": "latest",
+    "nodemon": "^1.9.2",
     "css-loader": "^0.23.1",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "style-loader": "^0.13.1",
-    "nodemon": "^1.9.2",
     "redux-thunk": "^2.1.0",
     "webpack-node-externals": "^1.2.0"
   }

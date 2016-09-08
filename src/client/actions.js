@@ -1,5 +1,6 @@
 export const LOAD_IMAGE = "LOAD_IMAGE";
 export const UPDATE_FILTER = "UPDATE_FILTER";
+export const UPDATE_SORT = "UPDATE_SORT";
 
 export function loadImage(imageData){
     return {
@@ -12,6 +13,13 @@ export function updateFilter(filter){
     return {
         type: UPDATE_FILTER,
         filter
+    }
+}
+
+export function updateSort(sort){
+    return {
+        type: UPDATE_SORT,
+        sort
     }
 }
 
@@ -36,7 +44,7 @@ export function retrieveImages(){
 }
 
 export function retrieveImageInfo(imageData){
-    return (dispatch)=>{
+    return (dispatch,state)=>{
         const url = "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=a5e95177da353f58113fd60296e1d250&photo_id="+imageData.id+"&format=json&nojsoncallback=1"
 
         const r = new XMLHttpRequest();

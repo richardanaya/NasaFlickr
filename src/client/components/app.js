@@ -7,18 +7,27 @@ class app extends Component {
   constructor (props) {
     super(props)
     this.handleOnFilterChange = this.handleOnFilterChange.bind(this)
+    this.handleOnSortChange = this.handleOnSortChange.bind(this)
   }
 
   handleOnFilterChange(e){
     this.props.actions.updateFilter(e.target.value)
   }
 
+  handleOnSortChange(e){
+    this.props.actions.updateSort(e.target.value)
+  }
+
   render () {
-    const {filteredImages,filter} = this.props.app;
-    var images = filteredImages.map((image)=>(<div key={image.id}>{image.title} - {image.description}<br/><img src={image.url}/></div>))
+    const {visibleImages,filter} = this.props.app;
+    var images = visibleImages.map((image)=>(<div key={image.id}>{image.title} - {image.description}<br/><img src={image.url}/></div>))
     return (
         <div>
           <input defaultValue={filter} onChange={this.handleOnFilterChange} />
+          <select defaultValue="newest" onChange={this.handleOnSortChange}>
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+          </select>
           {images}
         </div>
     )
