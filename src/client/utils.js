@@ -1,6 +1,5 @@
-export function stripHTMLFromString(html)
+export function stripHTMLFromString(txt)
 {
- var tmp = document.createElement("DIV");
- tmp.innerHTML = html;
- return tmp.textContent || tmp.innerText || "";
+   var rex = /(<([^>]+)>)/ig;
+   return txt.replace(rex , "")
 }
