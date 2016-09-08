@@ -1,20 +1,21 @@
-import {LOAD_IMAGES} from "./actions"
+import {LOAD_IMAGE} from "./actions"
+import {stripHTMLFromString} from "./utils"
 
 export default function(state = {
     images:[]
 }, action) {
     switch (action.type) {
-            case LOAD_IMAGES:
-            const imageURLs = [];
-            for(var i in action.imageData.photos.photo){
-              const photo = action.imageData.photos.photo[i];
-              const urlDefault = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '.jpg';
-              const urlLarge = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_b.jpg';
-              imageURLs.push({id:photo.id,url:urlDefault,urlLarge:urlLarge});
-            }
+        case LOAD_IMAGE:
+            const {id,server,secret,farm} = action.imageData;
+            const description = stripHTMLFromString(action.imageData.info.description._content);
+            const title = stripHTMLFromString(action.imageData.info.title._content);
+            const dateTaken = action.imageData.info.dates.taken
+            const url = 'https://farm' + farm + '.staticflickr.com/' + server + '/' + id + '_' + secret + '.jpg';
+            const urlLarge = 'https://farm' + farm + '.staticflickr.com/' + server + '/' + id + '_' + secret + '_b.jpg';
+            var photo = {id,url,urlLarge,description,title,dateTaken};
             return {
                 ...state,
-                images: imageURLs
+                images: state.images.concat(photo)
             }
         default:
             return state
