@@ -1,10 +1,17 @@
-export const RETRIEVE_IMAGES = "RETRIEVE_IMAGES";
 export const LOAD_IMAGE = "LOAD_IMAGE";
+export const UPDATE_FILTER = "UPDATE_FILTER";
 
 export function loadImage(imageData){
     return {
         type: LOAD_IMAGE,
         imageData
+    }
+}
+
+export function updateFilter(filter){
+    return {
+        type: UPDATE_FILTER,
+        filter
     }
 }
 

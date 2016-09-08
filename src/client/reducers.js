@@ -1,8 +1,22 @@
-import {LOAD_IMAGE} from "./actions"
+import {LOAD_IMAGE,UPDATE_FILTER} from "./actions"
 import {stripHTMLFromString} from "./utils"
 
+function imageMatchesFilter(image,filter){
+  if(filter.trim() === "") return true;
+  var filterElements = filter.match(/\S+/g) || []
+  for(var i in filterElements){
+    var txt = filterElements[i].toLowerCase();
+    if(image.title.toLowerCase().indexOf(txt)!==-1 || image.description.toLowerCase().indexOf(txt)!==-1){
+        return true;
+    }
+  }
+  return false;
+}
+
 export default function(state = {
-    images:[]
+    filter: "",
+    images:[],
+    filteredImages:[]
 }, action) {
     switch (action.type) {
         case LOAD_IMAGE:
@@ -12,10 +26,24 @@ export default function(state = {
             const dateTaken = action.imageData.info.dates.taken
             const url = 'https://farm' + farm + '.staticflickr.com/' + server + '/' + id + '_' + secret + '.jpg';
             const urlLarge = 'https://farm' + farm + '.staticflickr.com/' + server + '/' + id + '_' + secret + '_b.jpg';
-            var photo = {id,url,urlLarge,description,title,dateTaken};
+            var image = {id,url,urlLarge,description,title,dateTaken};
             return {
                 ...state,
-                images: state.images.concat(photo)
+                images: state.images.concat(image),
+                filteredImages: state.filteredImages.concat(image)
+            }
+        case UPDATE_FILTER:
+            const filteredImages = [];
+            for(var i in state.images){
+              var image = state.images[i];
+              if(imageMatchesFilter(image,action.filter)){
+                filteredImages.push(image);
+              }
+            }
+            return {
+                ...state,
+                filteredImages,
+                filter: action.filter
             }
         default:
             return state
