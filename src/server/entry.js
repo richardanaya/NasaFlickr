@@ -1,32 +1,18 @@
-var express = require('express');
+import express from 'express'
+import path from 'path'
 
-var configureServer = function() {
-    var server = express.createServer(    );
+const app = express();
 
-    server.configure(
-        function() {
-            //any static file from the static directory, just return it to user if requested
-            server.use(express.static('public'));
-        }
-    );
-    return server;
-};
+app.use(express.static(path.resolve() + '/public'));
 
 var port = process.env.PORT || 3000;
-var server = configureServer();
-
-server.get("/secret",
-    function (req, res) {
-        res.send("tomato")
-    }
-);
 
 //Catch every url call and redirect to index.html
-server.get(/^.*$/,
+app.get(/^.*$/,
     function (req, res) {
-        res.redirect("index.html");
+        res.sendFile(path.resolve()+'/public/index.html');
     }
 );
 
-server.listen(port);
+app.listen(port);
 console.log("listening on port "+port);

@@ -5,6 +5,8 @@ import { Provider } from 'react-redux'
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux'
 import App from "./components/app"
+import Photos from "./components/photos"
+import About from "./components/about"
 import reducers from './reducers'
 import "./styles/app.less"
 import thunk from 'redux-thunk';
@@ -25,10 +27,13 @@ const store = createStore(
 const history = syncHistoryWithStore(browserHistory, store)
 
 ReactDOM.render(
-<Provider store={store}>
-    <Router history={history}>
-        <Route path="/" component={App} />
-    </Router>
+    <Provider store={store}>
+      <Router history={history}>
+        <Route path="/" component={App}>
+          <IndexRoute component={Photos}/>
+          <Route path="about" component={About}/>
+        </Route>
+      </Router>
     </Provider>,
     document.getElementById('app')
 )
