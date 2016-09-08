@@ -20,15 +20,31 @@ class photos extends Component {
 
   render () {
     const {visibleImages,filter} = this.props.app;
-    var images = visibleImages.map((image)=>(<div key={image.id}>{image.title} - {image.description}<br/><img src={image.url}/></div>))
+    var images = visibleImages.map((image)=>(
+
+      <div className="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div className="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+      <div key={image.id}><img  height="40" src={image.url}/></div>
+
+      </div>
+      </div>
+    ))
     return (
         <div>
-          <input defaultValue={filter} onChange={this.handleOnFilterChange} />
-          <select defaultValue="newest" onChange={this.handleOnSortChange}>
-            <option value="newest">Newest First</option>
-            <option value="oldest">Oldest First</option>
-          </select>
+          <section className="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div className="mdl-card mdl-cell mdl-cell--12-col">
+              <div className="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+              <input defaultValue={filter} onChange={this.handleOnFilterChange} />
+              <select defaultValue="newest" onChange={this.handleOnSortChange}>
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+              </select>
+              </div>
+            </div>
+          </section>
+          <section className="section--center mdl-grid mdl-grid--no-spacing">
           {images}
+          </section>
         </div>
     )
   }
