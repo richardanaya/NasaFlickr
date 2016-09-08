@@ -20,6 +20,17 @@ const store = createStore(
     applyMiddleware(...middleware)
 )
 
+var url = "https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=a5e95177da353f58113fd60296e1d250&user_id=24662369@N07&format=json&nojsoncallback=1"
+
+var r = new XMLHttpRequest();
+r.open("GET", url, true);
+r.onreadystatechange = function () {
+  if (r.readyState != 4 || r.status != 200) return;
+  debugger;
+};
+r.send();
+
+
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store)
 
