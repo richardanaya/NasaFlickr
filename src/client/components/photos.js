@@ -5,18 +5,18 @@ import * as actionCreators from '../actions'
 
 class photos extends Component {
   constructor (props) {
-    super(props)
-    this.handleOnFilterChange = this.handleOnFilterChange.bind(this)
-    this.handleOnSortChange = this.handleOnSortChange.bind(this)
+    super(props);
+    this.handleOnFilterChange = this.handleOnFilterChange.bind(this);
+    this.handleOnSortChange = this.handleOnSortChange.bind(this);
   }
 
   handleOnFilterChange(e){
-    this.props.actions.updateFilter(e.target.value)
+    this.props.actions.updateFilter(e.target.value);
   }
 
   handleOnSortChange(e){
     const sort = e.target.getAttribute("data-value");
-    this.props.actions.updateSort(sort)
+    this.props.actions.updateSort(sort);
   }
 
   render () {
@@ -26,12 +26,12 @@ class photos extends Component {
     if(images.length ===0){
       content = (<div className="mdl-cell mdl-cell--12-col NoResultsCard">
         LOADING
-      </div>)
+      </div>);
     }
     else if(images.length > 0 && visibleImages.length === 0){
       content = (<div className="mdl-cell mdl-cell--12-col NoResultsCard">
         NO RESULTS
-      </div>)
+      </div>);
     }
     else {
       content = visibleImages.map((imageData)=>(
@@ -39,7 +39,7 @@ class photos extends Component {
           <div className="PhotoCardTitle">{imageData.title}</div>
           <a href={imageData.urlFlickr} target="_new"><img src={imageData.url}/></a>
         </div>
-      ))
+      ));
     }
 
     return (
@@ -58,7 +58,6 @@ class photos extends Component {
                         <label className="mdl-textfield__label" htmlFor="searchFilter">Search...</label>
                       </div>
                     </div>
-
                     <button id="sortMenu" className="mdl-button mdl-js-button mdl-button--icon">
                             <i className="material-icons">more_vert</i>
                             </button>
@@ -80,9 +79,8 @@ class photos extends Component {
             {content}
             </section>
           </section>
-
         </div>
-    )
+    );
   }
 }
 
@@ -90,6 +88,6 @@ class photos extends Component {
 photos = connect(
     state => ({app: state.app}),
     (dispatch)=>({ actions: bindActionCreators(actionCreators, dispatch) })
-)(photos)
+)(photos);
 
 export default photos;
