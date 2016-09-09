@@ -20,13 +20,28 @@ class photos extends Component {
   }
 
   render () {
-    const {visibleImages,filter} = this.props.app;
-    var images = visibleImages.map((image)=>(
-      <div className="mdl-cell mdl-cell--6-col PhotoCard" key={image.id}>
-        <div className="PhotoCardTitle">{image.title}</div>
-        <a href={image.urlFlickr} target="_new"><img src={image.url}/></a>
-      </div>
-    ))
+    const {images,visibleImages,filter} = this.props.app;
+
+    var content = null;
+    if(images.length ===0){
+      content = (<div className="mdl-cell mdl-cell--12-col NoResultsCard">
+        LOADING
+      </div>)
+    }
+    else if(images.length > 0 && visibleImages.length === 0){
+      content = (<div className="mdl-cell mdl-cell--12-col NoResultsCard">
+        NO RESULTS
+      </div>)
+    }
+    else {
+      content = visibleImages.map((imageData)=>(
+        <div className="mdl-cell mdl-cell--6-col PhotoCard" key={imageData.id}>
+          <div className="PhotoCardTitle">{imageData.title}</div>
+          <a href={imageData.urlFlickr} target="_new"><img src={imageData.url}/></a>
+        </div>
+      ))
+    }
+
     return (
         <div>
           <section className="PhotoSection section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
@@ -62,7 +77,7 @@ class photos extends Component {
               </div>
             </div>
             <section className="section--center mdl-grid mdl-grid--no-spacing">
-            {images}
+            {content}
             </section>
           </section>
 
