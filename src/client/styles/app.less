@@ -10,6 +10,23 @@
     min-width: 100%;
     min-height: 100%;
   }
+
+  .PhotoCardTitle {
+    background-color: rgba(6,6,6,.5);
+    position: absolute;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    color: white;
+    max-width: 600px;
+    font-weight: 200;
+    font-size:20px;
+
+    @media screen and (max-width: 460px) {
+        max-width: 300px;
+        font-size:15px;
+    }
+  }
 }
 .PhotoSection {
   margin-bottom: 100px;

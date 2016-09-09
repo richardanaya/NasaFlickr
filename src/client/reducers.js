@@ -60,8 +60,9 @@ export default function(state = {
             const dateTaken = moment(action.imageData.info.dates.taken)
             const url = 'https://farm' + farm + '.staticflickr.com/' + server + '/' + id + '_' + secret + '.jpg';
             const urlLarge = 'https://farm' + farm + '.staticflickr.com/' + server + '/' + id + '_' + secret + '_b.jpg';
+            const urlFlickr = "https://www.flickr.com/photos/24662369@N07/"+id+"/"
 
-            const image = {id,url,urlLarge,description,title,dateTaken};
+            const image = {id,url,urlLarge,description,title,dateTaken,urlFlickr};
 
             var newImages = state.images.concat(image);
             //filter and sort visible images in case it should be added or put in right order

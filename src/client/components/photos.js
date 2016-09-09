@@ -22,9 +22,9 @@ class photos extends Component {
   render () {
     const {visibleImages,filter} = this.props.app;
     var images = visibleImages.map((image)=>(
-
       <div className="mdl-cell mdl-cell--6-col PhotoCard" key={image.id}>
-        <img src={image.url}/>
+        <div className="PhotoCardTitle">{image.title}</div>
+        <a href={image.urlFlickr} target="_new"><img src={image.url}/></a>
       </div>
     ))
     return (

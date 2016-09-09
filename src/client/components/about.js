@@ -2,8 +2,6 @@ import React from 'react'
 
 function about(props){
   return (
-
-
     <section className="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
       <div className="mdl-card mdl-cell mdl-cell--12-col">
         <div className="mdl-card__supporting-text">
