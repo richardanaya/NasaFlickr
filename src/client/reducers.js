@@ -29,7 +29,7 @@ function filterImages(images,filter){
 }
 
 function sortImages(images,sort){
-  if(images === "newest"){
+  if(sort === "newest"){
     images.sort(function(a, b) {
         a = a.dateTaken.date();
         b = b.dateTaken.date();

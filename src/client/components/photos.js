@@ -15,36 +15,57 @@ class photos extends Component {
   }
 
   handleOnSortChange(e){
-    this.props.actions.updateSort(e.target.value)
+    const sort = e.target.getAttribute("data-value");
+    this.props.actions.updateSort(sort)
   }
 
   render () {
     const {visibleImages,filter} = this.props.app;
     var images = visibleImages.map((image)=>(
 
-      <div className="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
-        <div className="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
-      <div key={image.id}><img  height="40" src={image.url}/></div>
-
-      </div>
+      <div className="mdl-cell mdl-cell--6-col PhotoCard" key={image.id}>
+        <img src={image.url}/>
       </div>
     ))
     return (
         <div>
-          <section className="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+          <section className="PhotoSection section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
             <div className="mdl-card mdl-cell mdl-cell--12-col">
               <div className="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
-              <input defaultValue={filter} onChange={this.handleOnFilterChange} />
-              <select defaultValue="newest" onChange={this.handleOnSortChange}>
-                <option value="newest">Newest First</option>
-                <option value="oldest">Oldest First</option>
-              </select>
+                <div className="PhotoHeader">
+                  <div className="PhotoHeader-PhotoMenu">
+                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                      <label className="mdl-button mdl-js-button mdl-button--icon" htmlFor="searchFilter">
+                        <i className="material-icons">search</i>
+                      </label>
+                      <div className="mdl-textfield__expandable-holder">
+                        <input className="mdl-textfield__input" type="text" id="searchFilter" defaultValue={filter} onChange={this.handleOnFilterChange}/>
+                        <label className="mdl-textfield__label" htmlFor="searchFilter">Search...</label>
+                      </div>
+                    </div>
+
+                    <button id="sortMenu" className="mdl-button mdl-js-button mdl-button--icon">
+                            <i className="material-icons">more_vert</i>
+                            </button>
+                    <ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                        htmlFor="sortMenu">
+                      <li className="mdl-menu__item"
+                          data-value="newest"
+                          onClick={this.handleOnSortChange}>Newest First</li>
+                      <li className="mdl-menu__item"
+                          data-value="oldest"
+                          onClick={this.handleOnSortChange}>Oldest First</li>
+                    </ul>
+                  </div>
+                  <div className="PhotoTitle">Enjoy a collection of images of space and NASA's explorations!</div>
+                </div>
               </div>
             </div>
+            <section className="section--center mdl-grid mdl-grid--no-spacing">
+            {images}
+            </section>
           </section>
-          <section className="section--center mdl-grid mdl-grid--no-spacing">
-          {images}
-          </section>
+
         </div>
     )
   }
